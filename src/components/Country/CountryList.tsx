@@ -1,61 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { CountryListInterface } from '../../types';
 
-const CountryList: React.FC = () => {
+interface Props {
+  countryList: CountryListInterface[] | null;
+}
+
+const CountryList: React.FC<Props> = ({ countryList }) => {
+  const [activeListIndex, setActiveListIndex] = useState<number | null>(null);
+
   return (
-    <div className="col-4 pe-3">
+    <>
       <h3>Country List</h3>
       <div style={{ maxHeight: '500px', overflowY: 'auto' }}>
         <ul className="list-group">
-          <li className="list-group-item active" aria-current="true">
-            An active item
-          </li>
-          <li className="list-group-item">A second item</li>
-          <li className="list-group-item">A third item</li>
-          <li className="list-group-item">A fourth item</li>
-          <li className="list-group-item">And a fifth one</li>
-          <li className="list-group-item">A second item</li>
-          <li className="list-group-item">A third item</li>
-          <li className="list-group-item">A fourth item</li>
-          <li className="list-group-item">And a fifth one</li>
-          <li className="list-group-item">A second item</li>
-          <li className="list-group-item">A third item</li>
-          <li className="list-group-item">A fourth item</li>
-          <li className="list-group-item">And a fifth one</li>
-          <li className="list-group-item">A second item</li>
-          <li className="list-group-item">A third item</li>
-          <li className="list-group-item">A fourth item</li>
-          <li className="list-group-item">And a fifth one</li>
-          <li className="list-group-item">A second item</li>
-          <li className="list-group-item">A third item</li>
-          <li className="list-group-item">A fourth item</li>
-          <li className="list-group-item">And a fifth one</li>
-          <li className="list-group-item">A second item</li>
-          <li className="list-group-item">A third item</li>
-          <li className="list-group-item">A fourth item</li>
-          <li className="list-group-item">And a fifth one</li>
-          <li className="list-group-item">A second item</li>
-          <li className="list-group-item">A third item</li>
-          <li className="list-group-item">A fourth item</li>
-          <li className="list-group-item">And a fifth one</li>
-          <li className="list-group-item">A second item</li>
-          <li className="list-group-item">A third item</li>
-          <li className="list-group-item">A fourth item</li>
-          <li className="list-group-item">And a fifth one</li>
-          <li className="list-group-item">A second item</li>
-          <li className="list-group-item">A third item</li>
-          <li className="list-group-item">A fourth item</li>
-          <li className="list-group-item">And a fifth one</li>
-          <li className="list-group-item">A second item</li>
-          <li className="list-group-item">A third item</li>
-          <li className="list-group-item">A fourth item</li>
-          <li className="list-group-item">And a fifth one</li>
-          <li className="list-group-item">A second item</li>
-          <li className="list-group-item">A third item</li>
-          <li className="list-group-item">A fourth item</li>
-          <li className="list-group-item">And a fifth one</li>
+          {countryList &&
+            countryList.map((country) => (
+              <li
+                className={`list-group-item ${
+                  activeListIndex === country.id ? 'active' : ''
+                }`}
+                key={country.id}
+                onClick={() => setActiveListIndex(country.id)}
+              >
+                {country.nameCountry}
+              </li>
+            ))}
         </ul>
       </div>
-    </div>
+    </>
   );
 };
 
