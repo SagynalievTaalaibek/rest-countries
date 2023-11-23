@@ -1,5 +1,7 @@
+import CountryBlock from './containers/CountryBlock/CountryBlock';
+
 const App = () => {
-  return <div>Hello world</div>;
+  return <CountryBlock />;
 };
 
 export default App;
