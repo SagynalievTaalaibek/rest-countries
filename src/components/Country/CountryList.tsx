@@ -3,14 +3,19 @@ import { CountryListInterface } from '../../types';
 
 interface Props {
   countryList: CountryListInterface[] | null;
+  onClickCountry: (alpha3Code: string) => void;
 }
 
-const CountryList: React.FC<Props> = ({ countryList }) => {
+const CountryList: React.FC<Props> = ({ countryList, onClickCountry }) => {
   const [activeListIndex, setActiveListIndex] = useState<number | null>(null);
+
+  const onClick = (id: number, alpha3Code: string) => {
+    setActiveListIndex(id);
+    onClickCountry(alpha3Code);
+  };
 
   return (
     <>
-      <h3>Country List</h3>
       <div style={{ maxHeight: '500px', overflowY: 'auto' }}>
         <ul className="list-group">
           {countryList &&
@@ -20,7 +25,7 @@ const CountryList: React.FC<Props> = ({ countryList }) => {
                   activeListIndex === country.id ? 'active' : ''
                 }`}
                 key={country.id}
-                onClick={() => setActiveListIndex(country.id)}
+                onClick={() => onClick(country.id, country.alpha3Code)}
               >
                 {country.nameCountry}
               </li>
