@@ -7,3 +7,8 @@ export interface ApiListCountry {
   name: string;
   alpha3Code: string;
 }
+
+export interface CountryListInterface {
+  id: number;
+  nameCountry: string;
+}
